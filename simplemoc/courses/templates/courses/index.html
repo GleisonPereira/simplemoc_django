@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+
+{% load static %}
+
+
+<div class="pure-g-r">
+
+    <div class="content">
+        {% for course in courses %}
+        <div class="pure-g-r content-ribbon">
+            <div class="pure-u-2-3">
+                <div class="l-box">
+                    <h4 class="content-subhead">
+                    <a href="{{ course.get_absolute_url }}">
+                        {{ course.name }}
+                    </a></h4>
+                    <h3>{{ course.name }}</h3>
+                    <p>
+                        {{ course.descripton | linebreaks }}
+                    </p>
+                </div>
+            </div>
+            <div class="pure-u-1-3">
+                <div class="l-box">
+                    <a href="{{ course.get_absolute_url }}">
+                    {% if course.image %}
+                    <img src="{{ course.image.url }}" alt="{{ course.name }}">
+                    {% else %}
+                    <img src="{% static 'img/Cursos-Online.png' %}" alt="">
+                    {% endif %}
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="pure-g-r content-ribbon">
+            <div class="pure-u-2-3">
+                <div class="l-box">
+                    <p>
+                        Nenhum curso está disponível na plataforma
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
